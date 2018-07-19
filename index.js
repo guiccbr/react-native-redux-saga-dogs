@@ -1,5 +1,5 @@
 import React from 'react';
-import DogSagaApp from './src/components/App';
+import DogSagaApp from './src/containers/App';
 import createSagaMiddleware from 'redux-saga';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { AppRegistry } from 'react-native';
@@ -9,16 +9,13 @@ import { watcherSaga } from './src/sagas/sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(
-  reducer,
-  compose(applyMiddleware(sagaMiddleware)),
-);
+const store = createStore(reducer, compose(applyMiddleware(sagaMiddleware)));
 
 sagaMiddleware.run(watcherSaga);
 
 const App = () => (
   <Provider store={store}>
-    <DogSagaApp/>
+    <DogSagaApp />
   </Provider>
 );
 

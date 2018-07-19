@@ -4,7 +4,6 @@ import logo from '../../assets/logo.png';
 import styles from '../styles/look';
 import animations from '../styles/feel';
 import { Animated, Button, Text, View, ActivityIndicator } from 'react-native';
-import { connect } from 'react-redux';
 
 class DogSagaApp extends React.Component {
   constructor(props) {
@@ -86,23 +85,4 @@ DogSagaApp.propTypes = {
   error: PropTypes.string,
 };
 
-const mapStateToProps = state => {
-  return {
-    fetching: state.fetching,
-    dog: state.dog,
-    error: state.error,
-    imgLoading: state.imgLoading,
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onRequestDog: () => dispatch({ type: 'API_CALL_REQUEST' }),
-    onImgLoaded: () => dispatch({ type: 'IMG_LOADED' }),
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DogSagaApp);
+export default DogSagaApp;
