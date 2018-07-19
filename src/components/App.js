@@ -1,18 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import logo from '../../assets/logo.png';
-import {
-  Easing,
-  Animated,
-  Button,
-  StyleSheet,
-  Text,
-  View,
-  ActivityIndicator,
-} from 'react-native';
+import styles from '../styles/look';
+import animations from '../styles/feel';
+import { Animated, Button, Text, View, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 
 class DogSagaApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.spinValue = new Animated.Value(0);
+  }
+
+  componentDidMount() {
+    Animated.loop(
+      Animated.timing(this.spinValue, animations.logo.animProperties)
+    ).start();
+  }
+
   render() {
     const {
       fetching,
@@ -24,7 +29,9 @@ class DogSagaApp extends React.Component {
     } = this.props;
 
     const imgRotationStyle = {
-      transform: [{ rotate: spin }],
+      transform: [
+        { rotate: animations.logo.animInterpolation(this.spinValue) },
+      ],
     };
 
     return (
@@ -78,91 +85,6 @@ DogSagaApp.propTypes = {
   onImgLoaded: PropTypes.func.isRequired,
   error: PropTypes.string,
 };
-
-let spinValue = new Animated.Value(0);
-
-const animProperties = {
-  toValue: 1,
-  duration: 3000,
-  easing: Easing.linear,
-  useNativeDriver: true,
-};
-
-Animated.loop(Animated.timing(spinValue, animProperties)).start();
-
-const spin = spinValue.interpolate({
-  inputRange: [0, 1],
-  outputRange: ['0deg', '360deg'],
-});
-
-const baseStyles = {
-  logo: {
-    height: 50,
-    width: 50,
-  },
-  container: {
-    padding: 20,
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  activity: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    margin: 'auto',
-  },
-  error: {
-    color: 'red',
-  },
-};
-
-const styles = StyleSheet.create({
-  logo: {
-    ...baseStyles.logo,
-  },
-  logoHidden: {
-    ...baseStyles.logo,
-    opacity: 0,
-  },
-  activity: {
-    ...baseStyles.activity,
-  },
-  activityHidden: {
-    ...baseStyles.activity,
-    opacity: 0,
-  },
-  headerContainer: {
-    ...baseStyles.container,
-    backgroundColor: '#222',
-    height: 150,
-    justifyContent: 'space-between',
-    elevation: 1,
-  },
-  bodyContainer: {
-    ...baseStyles.container,
-    height: 150,
-    justifyContent: 'space-between',
-  },
-  headerText: {
-    ...baseStyles.text,
-    fontSize: 20,
-    color: 'white',
-  },
-  bodyText: {
-    ...baseStyles.text,
-    fontSize: 16,
-  },
-  error: {
-    ...baseStyles.error,
-  },
-  errorHidden: {
-    ...baseStyles.error,
-    opacity: 0,
-  },
-  imageContainer: {},
-});
 
 const mapStateToProps = state => {
   return {
