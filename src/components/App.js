@@ -31,9 +31,18 @@ class DogSagaApp extends React.Component {
       <View style={styles.container}>
         <View style={styles.headerContainer}>
           <View style={styles.imageContainer}>
-            <Animated.Image onLoad={onImgLoaded} style={imgLoading ? styles.logoHidden :
-              styles.logo} source={dog || logo} />
-            <ActivityIndicator style={imgLoading ? styles.activity : styles.activityHidden} size="small" />
+            <Animated.Image
+              onLoad={onImgLoaded}
+              style={[
+                imgLoading ? styles.logoHidden : styles.logo,
+                imgRotationStyle,
+              ]}
+              source={dog || logo}
+            />
+            <ActivityIndicator
+              style={imgLoading ? styles.activity : styles.activityHidden}
+              size="small"
+            />
           </View>
           <Text style={styles.headerText}>Welcome to Dog Saga</Text>
         </View>
@@ -83,7 +92,7 @@ Animated.loop(Animated.timing(spinValue, animProperties)).start();
 
 const spin = spinValue.interpolate({
   inputRange: [0, 1],
-  outputRange: ['0deg', '360deg']
+  outputRange: ['0deg', '360deg'],
 });
 
 const baseStyles = {
