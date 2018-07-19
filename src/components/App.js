@@ -76,7 +76,7 @@ DogSagaApp.propTypes = {
   }),
   onRequestDog: PropTypes.func.isRequired,
   onImgLoaded: PropTypes.func.isRequired,
-  error: PropTypes.string.isRequired,
+  error: PropTypes.string,
 };
 
 let spinValue = new Animated.Value(0);
