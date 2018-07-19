@@ -11,7 +11,7 @@ const initialState = {
 export function reducer(state = initialState, action) {
   switch (action.type) {
     case ApiCalls.API_CALL_REQUEST:
-      return { ...state, fetching: true, error: null, imgLoading: true};
+      return { ...state, fetching: true, error: null, imgLoading: true };
     case ApiCalls.API_CALL_SUCCESS:
       // TODO: Check if error: null is really required. It seems so.
       return { ...state, fetching: false, dog: action.dog, error: null };

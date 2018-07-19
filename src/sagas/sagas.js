@@ -27,14 +27,14 @@ function fetchDog() {
 }
 
 // Worker Saga: makes the API call when the watcher saga sees the action
-function *workerSaga() {
+function* workerSaga() {
   try {
     // call is another redux-saga helper, that will start a new generator
     // function fetchDog. This is necessary for saga to detect changes and/or
     // cancel (through takelatest) - makes a lot of sense. It returns a promise
     // (because fetchDog returns a promise indeed).
     const response = yield call(fetchDog);
-    const dog = {uri: response.data.message};
+    const dog = { uri: response.data.message };
 
     // dispatch a success action to the store with the new dog:
     // put is another redux-saga helper, that will dispatch an ACTION to Redux

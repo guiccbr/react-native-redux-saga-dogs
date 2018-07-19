@@ -1,13 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import logo from '../../assets/logo.png';
-import { Easing, Animated, Button, StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import {
+  Easing,
+  Animated,
+  Button,
+  StyleSheet,
+  Text,
+  View,
+  ActivityIndicator,
+} from 'react-native';
 import { connect } from 'react-redux';
 
 class DogSagaApp extends React.Component {
   render() {
-    const { fetching, dog, onRequestDog, onImgLoaded, error, imgLoading } =
-      this.props;
+    const {
+      fetching,
+      dog,
+      onRequestDog,
+      onImgLoaded,
+      error,
+      imgLoading,
+    } = this.props;
+
+    const imgRotationStyle = {
+      transform: [{ rotate: spin }],
+    };
 
     return (
       <View style={styles.container}>
@@ -23,16 +41,16 @@ class DogSagaApp extends React.Component {
           {(!imgLoading && dog) || dog ? (
             <Text style={styles.bodyText}>Keep clicking for new dogs</Text>
           ) : (
-            <Text style={styles.bodyText}>Replace the React icon with a dog!</Text>
+            <Text style={styles.bodyText}>
+              Replace the React icon with a dog!
+            </Text>
           )}
           <Button
             onPress={onRequestDog}
             title={fetching ? 'Fetching...' : 'Request a Dog'}
             disabled={fetching ? true : false}
           />
-          <Text
-            style={error ? styles.error : styles.errorHidden}
-          >
+          <Text style={error ? styles.error : styles.errorHidden}>
             Uh oh - something went wrong!
           </Text>
         </View>
@@ -58,12 +76,10 @@ const animProperties = {
   toValue: 1,
   duration: 3000,
   easing: Easing.linear,
-  useNativeDriver: true
+  useNativeDriver: true,
 };
 
-Animated.loop(
-  Animated.timing(spinValue, animProperties)
-).start();
+Animated.loop(Animated.timing(spinValue, animProperties)).start();
 
 const spin = spinValue.interpolate({
   inputRange: [0, 1],
@@ -74,7 +90,6 @@ const baseStyles = {
   logo: {
     height: 50,
     width: 50,
-    transform: [{rotate: spin}],
   },
   container: {
     padding: 20,
@@ -137,8 +152,7 @@ const styles = StyleSheet.create({
     ...baseStyles.error,
     opacity: 0,
   },
-  imageContainer: {
-  }
+  imageContainer: {},
 });
 
 const mapStateToProps = state => {
@@ -153,7 +167,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onRequestDog: () => dispatch({ type: 'API_CALL_REQUEST' }),
-    onImgLoaded: () => dispatch({ type: 'IMG_LOADED' })
+    onImgLoaded: () => dispatch({ type: 'IMG_LOADED' }),
   };
 };
 
