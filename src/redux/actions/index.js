@@ -1,3 +1,5 @@
+// @flow
+
 export const ApiCalls = {
   API_CALL_REQUEST: 'API_CALL_REQUEST',
   API_CALL_SUCCESS: 'API_CALL_SUCCESS',

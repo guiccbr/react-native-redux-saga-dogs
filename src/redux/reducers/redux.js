@@ -1,14 +1,22 @@
-import { ApiCalls, ImgStatus } from '../actions';
+// @flow
 
-// The reducer has a initial state - following lines:
-const initialState = {
-  fetching: false, // Represents if we're currently fetching or not
-  dog: null, // TODO: What's that?
-  error: null, // TODO: What's that?
+import { ApiCalls, ImgStatus } from '../actions';
+import type { DogSagaAppState } from '../../components/DogSagaApp';
+
+const initialState: DogSagaAppState = {
+  fetching: false,
+  dog: null,
+  error: null,
   imgLoading: true,
 };
 
-export function reducer(state = initialState, action) {
+type Action = {
+  +type: string,
+  dog: any,
+  error: any,
+};
+
+export function reducer(state: DogSagaAppState = initialState, action: Action) {
   switch (action.type) {
     case ApiCalls.API_CALL_REQUEST:
       return { ...state, fetching: true, error: null, imgLoading: true };

@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import logo from '../../assets/logo.png';
@@ -5,8 +7,23 @@ import styles from '../styles/look';
 import animations from '../styles/feel';
 import { Animated, Button, Text, View, ActivityIndicator } from 'react-native';
 
-class DogSagaApp extends React.Component {
-  constructor(props) {
+type DogSagaAppState = {
+  fetching: boolean,
+  dog: ?{ uri: string },
+  error: ?string,
+  imgLoading: boolean,
+};
+
+type DogSagaAppProps = {
+  ...DogSagaAppState,
+  onRequestDog: Function,
+  onImgLoaded: Function,
+};
+
+class DogSagaApp extends React.Component<DogSagaAppProps> {
+  spinValue: Animated.Value;
+
+  constructor(props: DogSagaAppProps) {
     super(props);
     this.spinValue = new Animated.Value(0);
   }
@@ -86,3 +103,4 @@ DogSagaApp.propTypes = {
 };
 
 export default DogSagaApp;
+export type { DogSagaAppState };

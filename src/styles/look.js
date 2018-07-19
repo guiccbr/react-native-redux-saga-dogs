@@ -1,3 +1,5 @@
+// @flow
+
 import { StyleSheet } from 'react-native';
 
 const baseStyles = {
@@ -51,12 +53,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   headerText: {
-    ...baseStyles.text,
     fontSize: 20,
     color: 'white',
   },
   bodyText: {
-    ...baseStyles.text,
     fontSize: 16,
   },
   error: {

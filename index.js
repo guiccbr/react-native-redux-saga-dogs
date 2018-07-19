@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import DogSagaApp from './src/containers/App';
 import createSagaMiddleware from 'redux-saga';

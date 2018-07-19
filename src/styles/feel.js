@@ -1,4 +1,6 @@
-import Easing from 'react-native';
+// @flow
+
+import { Easing, Animated } from 'react-native';
 
 const logo = {
   animProperties: {
@@ -7,7 +9,7 @@ const logo = {
     easing: Easing.linear,
     useNativeDriver: true,
   },
-  animInterpolation: input =>
+  animInterpolation: (input: Animated.value) =>
     input.interpolate({
       inputRange: [0, 1],
       outputRange: ['0deg', '360deg'],

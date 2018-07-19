@@ -1,10 +1,13 @@
+// @flow
+
 import { takeLatest, call, put } from 'redux-saga/effects';
 import axios from 'axios';
+import type { Saga } from 'redux-saga';
 
 // Watcher Saga: watches for actions dispatched to the store, starting worker
 // saga. TakeLatest listens for API_CALL_REQUEST and launches workerSaga when
 // that happens.
-export function* watcherSaga() {
+export function* watcherSaga(): Saga<void> {
   yield takeLatest('API_CALL_REQUEST', workerSaga);
   // TakeLatest is a helper function provided by redux-saga that will trigger a
   // workerSaga, every time that it sees an API_CALL_REQUEST, cancelling any
@@ -27,7 +30,7 @@ function fetchDog() {
 }
 
 // Worker Saga: makes the API call when the watcher saga sees the action
-function* workerSaga() {
+function* workerSaga(): Saga<void> {
   try {
     // call is another redux-saga helper, that will start a new generator
     // function fetchDog. This is necessary for saga to detect changes and/or
